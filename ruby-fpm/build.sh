@@ -1,10 +1,5 @@
 #!/bin/bash -ex
 
-apt-get update -y
-apt-get upgrade -y
-apt-get install -y build-essential git ruby-dev
-gem install fpm --no-ri --no-rdoc
-
 RUBY_VERSION=$1
 DEST=/tmp/dest
 cd /tmp
@@ -14,3 +9,6 @@ cd ruby-build
 
 mkdir -p $DEST
 bin/ruby-build $RUBY_VERSION $DEST
+
+# Build the package
+#fpm -s dir -t deb -n ksr-ruby -v 2.1.2  -C /tmp/dest --prefix /usr/local .
